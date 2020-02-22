@@ -6,22 +6,30 @@ use CGI::Session::ErrorHandler;
 $CGI::Session::Serialize::yaml::VERSION = '4.26';
 @CGI::Session::Serialize::yaml::ISA     = ( "CGI::Session::ErrorHandler" );
 our $Flavour;
+my $LOAD;
+my $DUMP;
 
 unless($Flavour) {
     my $package = (grep { eval("use $_ (); 1;") } qw(YAML::Syck YAML))[0]
         or die "Either YAML::Syck or YAML are required to use ", __PACKAGE__;
     $Flavour = $package;
 }
+$DUMP = $Flavour->can('Dump');
+$LOAD = sub {
+    no strict 'refs';
+    local ${ $Flavour . "::LoadBlessed" } = 1;
+    $Flavour->can('Load')->(@_);
+};
 
 sub freeze {
     my ($self, $data) = @_;
-    return $Flavour->can('Dump')->($data);
+    return $DUMP->($data);
 }
 
 
 sub thaw {
     my ($self, $string) = @_;
-    return ($Flavour->can('Load')->($string))[0];
+    return ($LOAD->($string))[0];
 }
 
 1;
