@@ -1,10 +1,6 @@
 use File::Spec;
 use Module::Build;
 
-# ./t/sessiondata is needed for testing.
-
-mkdir(File::Spec->catfile('t', 'sessiondata'));
-
 Module::Build -> new
 (
 	module_name    => 'CGI::Session::Serialize::yaml',

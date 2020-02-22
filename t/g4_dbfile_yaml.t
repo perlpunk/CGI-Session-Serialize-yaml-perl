@@ -5,9 +5,12 @@ use diagnostics;
 
 use Test::More;
 use File::Spec;
+use File::Path qw/ rmtree /;
 use CGI::Session::Test::Default;
 
 our %serializers;
+my $sessiondir = File::Spec->catfile('t', 'sessiondata');
+my $sessionfile = File::Spec->catfile('t', 'sessiondata', 'cgisess.db');
 
 our %options = (
     'YAML'            =>  {   },
@@ -32,7 +35,7 @@ while(my($k, $v) = each(%serializers)) {
     push(@test_objects, CGI::Session::Test::Default->new(
         dsn => "d:DB_File;s:YAML;id:md5",
         args => {
-            FileName => File::Spec->catfile('t', 'sessiondata', 'cgisess.db'),
+            FileName => $sessionfile,
         },
         %{$options{$k}},
         __testing_serializer => $k,
@@ -47,4 +50,8 @@ foreach my $to (@test_objects) {
     $CGI::Session::Serialize::yaml::Flavour = $to->{__testing_serializer};
     diag($CGI::Session::Serialize::yaml::Flavour);
     $to->run();
+}
+
+END {
+    rmtree($sessiondir);
 }

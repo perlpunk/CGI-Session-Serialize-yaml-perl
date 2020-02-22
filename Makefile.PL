@@ -20,11 +20,6 @@ WriteMakefile(
     clean => { FILES => [ 't/cgisess.*', 't/sessiondata' ] },
 );
 
-#
-# Creating place for test-scripts. Some of the scripts needs this to be present
-#
-mkdir(File::Spec->catfile('t', 'sessiondata'));
-
 package MY;
 use strict;
 
