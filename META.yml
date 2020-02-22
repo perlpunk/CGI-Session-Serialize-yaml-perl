@@ -17,10 +17,11 @@ name: CGI-Session-Serialize-yaml
 provides:
   CGI::Session::Serialize::yaml:
     file: lib/CGI/Session/Serialize/yaml.pm
-    version: 4.26
+    version: 4.26_001
 requires:
   CGI::Session: 4.3
   CGI::Session::ErrorHandler: 4.3
 resources:
   license: http://opensource.org/licenses/artistic-license.php
-version: 4.26
+  repository: https://github.com/perlpunk/CGI-Session-Serialize-yaml-perl
+version: 4.26_001

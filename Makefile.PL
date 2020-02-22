@@ -15,9 +15,20 @@ WriteMakefile(
         'Test::More'                 => 0,
 		'Test::Pod'                  => 0,
     },
+    LICENSE => 'perl',
     ABSTRACT => 'Persistent session data in CGI applications',
     AUTHOR => 'Sherzod Ruzmetov <sherzodr@cpan.org>',
     clean => { FILES => [ 't/cgisess.*', 't/sessiondata' ] },
+    META_MERGE => {
+        "meta-spec" => { version => 2 },
+        resources => {
+            repository => {
+                type => 'git',
+                url => 'https://github.com/perlpunk/CGI-Session-Serialize-yaml-perl.git',
+                web => 'https://github.com/perlpunk/CGI-Session-Serialize-yaml-perl',
+            },
+        },
+    },
 );
 
 package MY;

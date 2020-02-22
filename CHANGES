@@ -1,5 +1,10 @@
 CGI::Session::Serialize::yaml Change Log
 
+4.26_001 2020-02-22 14:25:31+01:00
+
+	Set $LoadBlessed to 1 (YAML::Syck/YAML::XS/YAML.pm changed their default
+    to 0)
+
 4.26  Wed Feb 10 13:52:41 2010
 	- Add META.yml. Update MANIFEST.SKIP. Add MANIFEST and MYMETA.yml.
 
