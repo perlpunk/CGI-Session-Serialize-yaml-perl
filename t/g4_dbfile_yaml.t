@@ -15,6 +15,7 @@ my $sessionfile = File::Spec->catfile('t', 'sessiondata', 'cgisess.db');
 our %options = (
     'YAML'            =>  {   },
     'YAML::Syck'      =>  { skip    =>  [101]   },
+    'YAML::XS'        =>  {   },
 );
 
 plan skip_all => 'DB_File is NOT available' unless eval { require DB_File };

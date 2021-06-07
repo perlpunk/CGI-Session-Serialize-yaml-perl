@@ -60,11 +60,33 @@ serializer.
 
 =item freeze($class, \%hash)
 
-Receives two arguments. First is the class name, the second is the data to be serialized. Should return serialized string on success, undef on failure. Error message should be set using C<set_error()|CGI::Session::ErrorHandler/"set_error()">
+Receives two arguments. First is the class name, the second is the data to be
+serialized. Should return serialized string on success, undef on failure. Error
+message should be set using
+C<set_error()|CGI::Session::ErrorHandler/"set_error()">
 
 =item thaw($class, $string)
 
-Received two arguments. First is the class name, second is the C<YAML> data string. Should return thawed data structure on success, undef on failure. Error message should be set using C<set_error()|CGI::Session::ErrorHandler/"set_error()">
+Received two arguments. First is the class name, second is the C<YAML> data
+string. Should return thawed data structure on success, undef on failure. Error
+message should be set using
+C<set_error()|CGI::Session::ErrorHandler/"set_error()">
+
+=head1 IMPLEMENTATION
+
+Note that this module enables instantiating objects, so you should not use it
+if your session data comes from an untrusted source.
+
+L<YAML::Syck> is automatically used if it is available, otherwise
+L<YAML>.pm will be used. You can also specify L<YAML::XS>:
+
+    $CGI::Session::Serialize::yaml::Flavour = 'YAML::XS';
+
+You should be aware that the three YAML modules all have some differences in
+their implementation of YAML. They were written for different YAML versions,
+they have bugs, and they deliberately left out certain things.
+
+Using a diffedrent module for existing session data could be problematic.
 
 =back
 
