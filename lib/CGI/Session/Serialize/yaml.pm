@@ -3,7 +3,7 @@ package CGI::Session::Serialize::yaml;
 use strict;
 use CGI::Session::ErrorHandler;
 
-$CGI::Session::Serialize::yaml::VERSION = '4.26_001';
+$CGI::Session::Serialize::yaml::VERSION = '4.26_002';
 @CGI::Session::Serialize::yaml::ISA     = ( "CGI::Session::ErrorHandler" );
 our $Flavour;
 my $LOAD;
@@ -72,6 +72,8 @@ string. Should return thawed data structure on success, undef on failure. Error
 message should be set using
 C<set_error()|CGI::Session::ErrorHandler/"set_error()">
 
+=back
+
 =head1 IMPLEMENTATION
 
 Note that this module enables instantiating objects, so you should not use it
@@ -87,8 +89,6 @@ their implementation of YAML. They were written for different YAML versions,
 they have bugs, and they deliberately left out certain things.
 
 Using a diffedrent module for existing session data could be problematic.
-
-=back
 
 =head1 SEE ALSO
 
